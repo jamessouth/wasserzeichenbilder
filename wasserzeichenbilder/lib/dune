@@ -1,2 +1,5 @@
 (library
- (name wasserzeichenbilder))
+ (name wasserzeichenbilder)
+ (libraries core core_unix)
+ (preprocess
+  (pps ppx_jane)))

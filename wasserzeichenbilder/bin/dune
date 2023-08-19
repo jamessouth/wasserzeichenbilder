@@ -1,4 +1,6 @@
 (executable
  (public_name wasserzeichenbilder)
  (name main)
- (libraries wasserzeichenbilder))
+ (libraries core core_unix.command_unix wasserzeichenbilder)
+ (preprocess
+  (pps ppx_jane)))

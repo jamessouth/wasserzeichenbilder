@@ -91,13 +91,13 @@ mapfile -t res < <(identify -verbose "$input" | awk '/Geometry:/{split($2,a,"+")
 #echo ${res[3]}
 
 
-convert -size ${res[3]} xc:transparent -gravity $gravity -font $font -pointsize $pointsize -fill $col1 -annotate +$depth+$depth $logo -fill $col2  -annotate -$depth-$depth $logo -fill $col3 -annotate +0+0 $logo transp.png
+convert -size "${res[3]}" xc:transparent -gravity "$gravity" -font "$font" -pointsize "$pointsize" -fill "$col1" -annotate +"$depth"+"$depth" "$logo" -fill "$col2"  -annotate -"$depth"-"$depth" "$logo" -fill "$col3" -annotate +0+0 "$logo" transp.png
 
 
-convert -size ${res[3]} xc:black -gravity $gravity -font $font -pointsize $pointsize -fill white -annotate +$depth+$depth $logo -fill white -annotate -$depth-$depth $logo -fill $col4 -annotate +0+0 $logo mask.jpg
+convert -size "${res[3]}" xc:black -gravity "$gravity" -font "$font" -pointsize "$pointsize" -fill white -annotate +"$depth"+"$depth" "$logo" -fill white -annotate -"$depth"-"$depth" "$logo" -fill "$col4" -annotate +0+0 "$logo" mask.jpg
 
 
-composite transp.png $input mask.jpg $output
+composite transp.png "$input" mask.jpg "$output"
 
 rm transp.png mask.jpg
 
