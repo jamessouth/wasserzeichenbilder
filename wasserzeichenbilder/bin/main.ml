@@ -11,18 +11,9 @@ module Gravity : Command.Enumerable_stringable = struct
     | SouthWest
     | South
     | SouthEast
-  [@@deriving enumerate]
+  [@@deriving enumerate, show { with_path = false }]
 
-  let to_string = function
-    | NorthWest -> "NorthWest"
-    | North -> "North"
-    | NorthEast -> "NorthEast"
-    | West -> "West"
-    | Center -> "Center"
-    | East -> "East"
-    | SouthWest -> "SouthWest"
-    | South -> "South"
-    | SouthEast -> "SouthEast"
+  let to_string = show
 end
 
 let gravity =
@@ -37,9 +28,7 @@ let () =
     (Command.basic ~summary:"fib clock"
        ~readme:(fun () -> "Enter ")
        (let%map_open.Command gravity =
-          flag "-gravity"
-            (one_or_more_as_pair gravities)
-            ~doc:"string gravity"
+          flag "-gravity" (one_or_more_as_pair gravities) ~doc:"string gravity"
         in
 
         fun () ->
