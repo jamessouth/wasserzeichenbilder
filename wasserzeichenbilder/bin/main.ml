@@ -30,39 +30,39 @@ let () =
             (optional_with_default Gravity.Center gravities)
             ~doc:"string gravity (default: Center)"
         and font =
-          flag "-font"
-            (optional_with_default "FiraCode-Nerd-Font-Mono-Reg" string)
-            ~doc:"string font (default: FiraCode-Nerd-Font-Mono-Reg)"
+          flag_optional_with_default_doc "-font" string
+            (fun x -> String.sexp_of_t x)
+            ~default:"FiraCode-Nerd-Font-Mono-Reg" ~doc:"string font"
         and pointsize =
-          flag "-pointsize"
-            (optional_with_default 300 int)
-            ~doc:"string pointsize (default: 300)"
+          flag_optional_with_default_doc "-pointsize" int
+            (fun x -> Int.sexp_of_t x)
+            ~default:300 ~doc:"int pointsize"
         and elevation =
-          flag "-elevation"
-            (optional_with_default 2 int)
-            ~doc:"string elevation (default: 2)"
+          flag_optional_with_default_doc "-elevation" int
+            (fun x -> Int.sexp_of_t x)
+            ~default:2 ~doc:"int elevation"
         and color1 =
-          flag "-color1"
-            (optional_with_default "black" string)
-            ~doc:"string color1 (default: black)"
+          flag_optional_with_default_doc "-color1" string
+            (fun x -> String.sexp_of_t x)
+            ~default:"black" ~doc:"string color1"
         and color2 =
-          flag "-color2"
-            (optional_with_default "white" string)
-            ~doc:"string color2 (default: white)"
+          flag_optional_with_default_doc "-color2" string
+            (fun x -> String.sexp_of_t x)
+            ~default:"white" ~doc:"string color2"
         and color3 =
-          flag "-color3"
-            (optional_with_default "#555555" string)
-            ~doc:"string color3 (default: #555555)"
+          flag_optional_with_default_doc "-color3" string
+            (fun x -> String.sexp_of_t x)
+            ~default:"#555555" ~doc:"string color3"
         and color4 =
-          flag "-color4"
-            (optional_with_default "#33333355" string)
-            ~doc:"string color4 (default: #33333355)"
+          flag_optional_with_default_doc "-color4" string
+            (fun x -> String.sexp_of_t x)
+            ~default:"#33333355" ~doc:"string color4"
         and logo =
-          flag_optional_with_default_doc "-logo"
-            string (fun s -> Sexp.of_string s) ~default: ""
-            ~doc:"string logo"
+          flag_optional_with_default_doc "-logo" string
+            (fun _ -> Sexp.Atom "_")
+            ~default:"" ~doc:"string logo (default:  (Linux penguin mascot))"
         in
-        (* (default:  (Linux penguin mascot)) *)
+
         fun () ->
           Stdlib.print_string (Gravity.to_string gravity);
           Stdlib.print_string font;
