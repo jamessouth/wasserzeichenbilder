@@ -37,8 +37,12 @@ let image_file =
 
 let () =
   Command_unix.run ~version:"1.0.0" ~build_info:"RWO"
-    (Command.basic ~summary:"fib clock"
-       ~readme:(fun () -> "Enter ")
+    (Command.basic
+       ~summary:
+         "        Wasserzeichenbilder (watermark images)\n\
+          Linux-ize your background images with your distro logo\n\
+         \            󱄛     󰣨         󱄚 "
+       ~readme:(fun () -> "Enter your image and a name for the output")
        (let%map_open.Command gravity =
           flag_optional_with_default_doc "-gravity" gravities
             (fun x -> String.sexp_of_t (Gravity.to_string x))
@@ -75,8 +79,8 @@ let () =
         and logo =
           flag_optional_with_default_doc "-logo" string
             (fun _ -> Sexp.Atom "_")
-            ~default:""
-            ~doc:"string logo character (default:  (Linux penguin))"
+            ~default:""
+            ~doc:"string logo character (default:  (Linux penguin))"
         and image =
           flag "-image" (required image_file)
             ~doc:"string the input image (jpg, jpeg, png, webp, gif)"
@@ -96,4 +100,9 @@ let () =
           Stdlib.print_string logo;
           Stdlib.print_string image;
           Stdlib.print_string output;
-          Stdlib.print_newline ()))
+          Stdlib.print_newline ();
+          
+          
+          Wasserzeichenbilder.Wzb.run
+          
+          ))
